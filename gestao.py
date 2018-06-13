@@ -1,5 +1,5 @@
-from tkinter import *
-import tkinter as tk
+from Tkinter import *
+import Tkinter as tk
 import MySQLdb
 import random
 
@@ -72,7 +72,7 @@ class Menu:
         self.nomef.focus()
         self.b = Button(self.frame1, text="Adicionar", command=callback)
         self.b.pack()
-
+        self.b.pack_forget()
         c = Button(self.frame2, text=">>", command=destroy)
         c.pack()
 
