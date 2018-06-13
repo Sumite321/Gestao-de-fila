@@ -8,7 +8,7 @@ tmp = []
 tmp1 = []
 
 def callback():
-    print("sds")
+
     nameOfStudent = ""
     duplicate = True
     db = MySQLdb.connect(host="localhost",
