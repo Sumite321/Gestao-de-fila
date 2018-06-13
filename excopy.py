@@ -1,5 +1,5 @@
-from Tkinter import *
-import Tkinter as tk
+from tkinter import *
+import tkinter as tk
 import MySQLdb
 import random
 
@@ -28,7 +28,7 @@ def callback():
 
     for name in tmp:
         if (nameOfStudent == name.cget("text")):
-            duplicate = False
+            Notduplicate = False
 
     if (Notduplicate) and found:
         a.addLabel(nameOfStudent)
