@@ -8,7 +8,8 @@ tmp1 = []
 
 def callback():
     nameOfStudent = ""
-    duplicate = True
+    Notduplicate = True
+    found = False
     db = MySQLdb.connect(host="localhost",
                          user="root",
                          passwd="",
@@ -21,12 +22,13 @@ def callback():
     for row in cur.fetchall():
         if(a.get() == row[0]):
             nameOfStudent = row[1]
+            found = True
 
     for name in tmp:
         if (nameOfStudent == name.cget("text")):
             duplicate = False
 
-    if (duplicate):
+    if (Notduplicate) and found:
         a.addLabel(nameOfStudent)
 
     db.close()
