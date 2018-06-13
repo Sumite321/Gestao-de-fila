@@ -1,10 +1,12 @@
 from Tkinter import *
 import Tkinter as tk
 import MySQLdb
+import random
 
 global a
 tmp = []
 tmp1 = []
+COLORS =["red", "orange", "yellow", "green", "blue", "violet"]
 
 def callback():
     nameOfStudent = ""
@@ -47,6 +49,9 @@ def destroy():
 
 class Menu:
     def __init__(self, toplevel, title):
+        
+        self.level = toplevel
+        self._after_id = None
         self.frame1 = tk.Frame(root, bg = 'lightblue')
         self.frame2 = tk.Frame(root, bg = 'lightgreen')
 
@@ -63,8 +68,10 @@ class Menu:
         fonte1 = ('Verdana', '10', 'bold')
         self.nomef = Entry(self.frame1, width=10, font=fonte1)
         self.nomef.pack()
-        b = Button(self.frame1, text="Adicionar", command=callback)
-        b.pack()
+        self.nomef.bind('<Key>',self.handle_wait)
+        self.nomef.focus()
+        self.b = Button(self.frame1, text="Adicionar", command=callback)
+        self.b.pack()
 
         c = Button(self.frame2, text=">>", command=destroy)
         c.pack()
@@ -83,9 +90,23 @@ class Menu:
         tmp1.append(Label(self.frame2, text=name, bg='lightgreen',font=fonte3, height=3))
         for x in tmp1:
             x.pack()
-
+    
     def clearText(self):
         self.nomef.delete(0, END)
+
+    def handle_wait(self,event):
+    
+        if self._after_id is not None:
+            self.level.after_cancel(self._after_id)
+        
+        # create a new job
+        self._after_id = self.level.after(1000, self.change_color)
+    
+    def change_color(self):
+        random_color = random.choice(COLORS)
+        self.nomef.config(background=random_color)
+        print("butao")
+        self.b.invoke()
 
 root = Tk()
 a = Menu(root, "Lista")
