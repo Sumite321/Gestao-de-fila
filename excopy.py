@@ -1,6 +1,5 @@
 from tkinter import *
 import tkinter as tk
-import datetime
 import MySQLdb
 
 global a
