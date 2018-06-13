@@ -1,5 +1,5 @@
-from tkinter import *
-import tkinter as tk
+from Tkinter import *
+import Tkinter as tk
 import MySQLdb
 
 global a
@@ -19,14 +19,10 @@ def callback():
     cur.execute("SELECT * FROM dados_cartao")
  
     for row in cur.fetchall():
-        print(row[0], row[1])
         if(a.get() == row[0]):
             nameOfStudent = row[1]
-            print(nameOfStudent)
 
     for name in tmp:
-        print("Nome: " + nameOfStudent)
-        print("Nome2: " + name.cget("text"))
         if (nameOfStudent == name.cget("text")):
             duplicate = False
 
@@ -34,11 +30,9 @@ def callback():
         a.addLabel(nameOfStudent)
 
     db.close()
-    a.nomef.delete('1.0', END)
     print(a.get().lower())
-    
-    
-    #a.addLabel(a.get())
+    a.clearText()
+
 
 def destroy():
     if len(tmp1)>0:
@@ -87,6 +81,9 @@ class Menu:
         tmp1.append(Label(self.frame2, text=name, bg='lightgreen',font=fonte3, height=3))
         for x in tmp1:
             x.pack()
+
+    def clearText(self):
+        self.nomef.delete(0, END)
 
 root = Tk()
 a = Menu(root, "Lista")
