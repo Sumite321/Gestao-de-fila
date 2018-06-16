@@ -2,11 +2,15 @@ from Tkinter import *
 import Tkinter as tk
 import MySQLdb
 import random
+from PIL import ImageTk, Image
+
 
 global a
 tmp = []
 tmp1 = []
 COLORS =["red", "orange", "yellow", "green", "blue", "violet"]
+tmp2 = []
+
 
 def callback():
     nameOfStudent = ""
@@ -22,6 +26,7 @@ def callback():
     cur.execute("SELECT * FROM dados_cartao")
  
     for row in cur.fetchall():
+        print(row[0],row[1])
         if(a.get() == row[0]):
             nameOfStudent = row[1]
             found = True
@@ -39,13 +44,18 @@ def callback():
 
 
 def destroy():
+    
     if len(tmp1)>0:
         tmp1[0].destroy()
+        tmp2[0].destroy()
     if len(tmp1)>0:
         tmp1.pop(0)
+        tmp2.pop(0)
     a.addToMyTurn(tmp[0].cget("text"))
     tmp[0].destroy()
     tmp.pop(0)
+
+
 
 class Menu:
     def __init__(self, toplevel, title):
@@ -88,8 +98,21 @@ class Menu:
     def addToMyTurn(self,name):
         fonte3 = ('Verdana', '15')
         tmp1.append(Label(self.frame2, text=name, bg='lightgreen',font=fonte3, height=3))
+
         for x in tmp1:
             x.pack()
+
+        path = "unknow.png"
+        #Creates a Tkinter-compatible photo image, which can be used everywhere Tkinter expects image object.
+        img = ImageTk.PhotoImage(Image.open(path).resize((250, 250)))
+        
+        #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
+        tmp2.append(tk.Label(a.frame2, image = img))
+        
+        for photo in tmp2:
+            photo.photo = img # keep a reference!
+            #The Pack geometry manager packs widgets in rows or columns.
+            photo.pack()
     
     def clearText(self):
         self.nomef.delete(0, END)
