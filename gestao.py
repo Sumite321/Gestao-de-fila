@@ -1,5 +1,5 @@
-from tkinter import *
-import tkinter as tk
+from Tkinter import *
+import Tkinter as tk
 import MySQLdb
 import random
 from PIL import ImageTk, Image
