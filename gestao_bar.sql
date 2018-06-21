@@ -13,3 +13,11 @@ insert into dados_cartao(Id, Nome)
 values ('00ED0FE3', 'Ricardo');
 insert into dados_cartao(Id, Nome)
 values ('00694D96', 'Jose');
+insert into dados_cartao(Id, Nome)
+values ('00F4236C', 'Rodrigo');
+insert into dados_cartao(Id, Nome)
+values ('00AD5E99', 'Niverson');
+insert into dados_cartao(Id, Nome)
+values ('0088D0C0', 'Pedro Andrade');
+insert into dados_cartao(Id, Nome)
+values ('00468C20', 'Silva');
