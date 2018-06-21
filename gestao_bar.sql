@@ -1,5 +1,6 @@
 use gestao_bar;
 
+
 create table dados_cartao(
 Id varchar(8),
 primary key(Id),
