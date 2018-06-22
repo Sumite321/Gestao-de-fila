@@ -3,7 +3,7 @@ import Tkinter as tk
 import MySQLdb
 import random
 from PIL import ImageTk, Image
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 import threading
 
@@ -137,13 +137,13 @@ class ThreadingExample(object):
         until the application exits.
         """
     
-    def __init__(self, interval=1):
+    def __init__(self, interval=0.2):
         """ Constructor
             :type interval: int
             :param interval: Check interval, in seconds
             """
         GPIO.setmode(GPIO.BCM)
-
+        
         GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         self.interval = interval
         
@@ -158,14 +158,20 @@ class ThreadingExample(object):
             input_state = GPIO.input(18)
             if input_state == False:
                 print('Button Pressed')
-                time.sleep(0.2)
+            
+            
+            time.sleep(self.interval)
 
 example = ThreadingExample()
-
 
 root = Tk()
 a = Menu(root, "Lista")
 root.geometry("640x480")
 root.mainloop()
+
+
+
+
+
 
 
