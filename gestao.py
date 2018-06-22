@@ -11,7 +11,7 @@ global a
 tmp = []
 tmp1 = []
 COLORS =["red", "orange", "green"]
-tmp2 = []
+tmp2 = [] #imagens
 
 
 def callback():
@@ -47,15 +47,19 @@ def callback():
 
 def destroy():
     if(len(tmp)) > 0:
-        if len(tmp1)>0:
+        if(len(tmp1)>0):
             tmp1[0].destroy()
             tmp2[0].destroy()
-        if len(tmp1)>0:
             tmp1.pop(0)
             tmp2.pop(0)
         a.addToMyTurn(tmp[0].cget("text"))
         tmp[0].destroy()
         tmp.pop(0)
+    elif(len(tmp1)>0):
+        tmp1[0].destroy()
+        tmp2[0].destroy()
+        tmp1.pop(0)
+        tmp2.pop(0)
 
 
 
