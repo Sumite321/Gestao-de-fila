@@ -135,13 +135,16 @@ GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-while True:
-    root = Tk()
-    a = Menu(root, "Lista")
-    root.geometry("640x480")
-    root.mainloop()
-    input_state = GPIO.input(18)
-    if input_state == False:
-        print("Button pressed")
-        destroy()
-        time.sleep(0.2)
+
+root = Tk()
+a = Menu(root, "Lista")
+root.geometry("640x480")
+root.mainloop()
+
+input_state = GPIO.input(18)
+if input_state == False:
+    print("Button pressed")
+    destroy()
+    time.sleep(0.2)
+else:
+    print("Button not pressed")
