@@ -3,7 +3,7 @@ import Tkinter as tk
 import MySQLdb
 import random
 from PIL import ImageTk, Image
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import threading
 
