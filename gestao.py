@@ -46,7 +46,7 @@ def callback():
 
 
 def destroy():
-    if(len(tmp0)) > 0:
+    if(len(tmp)) > 0:
         if len(tmp1)>0:
             tmp1[0].destroy()
             tmp2[0].destroy()
