@@ -5,8 +5,7 @@ import random
 from PIL import ImageTk, Image
 import RPi.GPIO as GPIO
 import time
-
-
+import threading
 
 global a
 tmp = []
@@ -131,20 +130,41 @@ class Menu:
         print("butao")
         self.b.invoke()
 
-GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+class ThreadingExample(object):
+    """ Threading example class
+        The run() method will be started and it will run in the background
+        until the application exits.
+        """
+    
+    def __init__(self, interval=1):
+        """ Constructor
+            :type interval: int
+            :param interval: Check interval, in seconds
+            """
+        self.interval = interval
+        
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True                            # Daemonize thread
+        thread.start()                                  # Start the execution
+    
+    def run(self):
+        """ Method that runs forever """
+        while True:
+            # Do something
+            print('Doing something imporant in the background')
+            
+            time.sleep(self.interval)
 
+example = ThreadingExample()
+time.sleep(3)
+print('Checkpoint')
+time.sleep(2)
+print('Bye')
 
 root = Tk()
 a = Menu(root, "Lista")
 root.geometry("640x480")
 root.mainloop()
 
-input_state = GPIO.input(18)
-if input_state == False:
-    print("Button pressed")
-    destroy()
-    time.sleep(0.2)
-else:
-    print("Button not pressed")
+
