@@ -158,6 +158,7 @@ class ThreadingExample(object):
             input_state = GPIO.input(18)
             if input_state == False:
                 print('Button Pressed')
+                destroy()
             
             
             time.sleep(self.interval)
