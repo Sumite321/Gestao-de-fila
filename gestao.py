@@ -142,6 +142,9 @@ class ThreadingExample(object):
             :type interval: int
             :param interval: Check interval, in seconds
             """
+        GPIO.setmode(GPIO.BCM)
+
+        GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         self.interval = interval
         
         thread = threading.Thread(target=self.run, args=())
@@ -152,15 +155,15 @@ class ThreadingExample(object):
         """ Method that runs forever """
         while True:
             # Do something
-            print('Doing something imporant in the background')
+            input_state = GPIO.input(18)
+            if input_state == False:
+                print('Button Pressed')
+                time.sleep(0.2)
             
             time.sleep(self.interval)
 
 example = ThreadingExample()
-time.sleep(3)
-print('Checkpoint')
-time.sleep(2)
-print('Bye')
+
 
 root = Tk()
 a = Menu(root, "Lista")
