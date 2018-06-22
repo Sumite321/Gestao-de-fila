@@ -6,9 +6,7 @@ from PIL import ImageTk, Image
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 global a
 tmp = []
@@ -133,12 +131,15 @@ class Menu:
         print("butao")
         self.b.invoke()
 
-root = Tk()
-a = Menu(root, "Lista")
-root.geometry("640x480")
-root.mainloop()
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 while True:
+    root = Tk()
+    a = Menu(root, "Lista")
+    root.geometry("640x480")
+    root.mainloop()
     input_state = GPIO.input(18)
     if input_state == False:
         print("Button pressed")
