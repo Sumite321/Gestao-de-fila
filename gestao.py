@@ -21,7 +21,7 @@ while True:
 global a
 tmp = []
 tmp1 = []
-COLORS =["red", "orange", "yellow", "green", "blue", "violet"]
+COLORS =["red", "orange", "green"]
 tmp2 = []
 
 
@@ -57,7 +57,6 @@ def callback():
 
 
 def destroy():
-    
     if len(tmp1)>0:
         tmp1[0].destroy()
         tmp2[0].destroy()
@@ -116,15 +115,14 @@ class Menu:
             x.pack()
 
         path = "unknow.png"
-        #Creates a Tkinter-compatible photo image, which can be used everywhere Tkinter expects image object.
+        
         img = ImageTk.PhotoImage(Image.open(path).resize((250, 250)))
         
-        #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
+        
         tmp2.append(tk.Label(a.frame2, image = img))
         
         for photo in tmp2:
-            photo.photo = img # keep a reference!
-            #The Pack geometry manager packs widgets in rows or columns.
+            photo.photo = img
             photo.pack()
     
     def clearText(self):
@@ -135,7 +133,6 @@ class Menu:
         if self._after_id is not None:
             self.level.after_cancel(self._after_id)
         
-        # create a new job
         self._after_id = self.level.after(1000, self.change_color)
     
     def change_color(self):
