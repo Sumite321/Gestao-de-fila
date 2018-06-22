@@ -59,11 +59,7 @@ def destroy():
     tmp[0].destroy()
     tmp.pop(0)
 
-while True:
-    input_state = GPIO.input(18)
-    if input_state == False:
-        destroy()
-        time.sleep(0.2)
+
 
 class Menu:
     def __init__(self, toplevel, title):
@@ -141,3 +137,10 @@ root = Tk()
 a = Menu(root, "Lista")
 root.geometry("640x480")
 root.mainloop()
+
+while True:
+    input_state = GPIO.input(18)
+    if input_state == False:
+        print("Button pressed")
+        destroy()
+        time.sleep(0.2)
