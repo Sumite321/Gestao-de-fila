@@ -159,8 +159,6 @@ class ThreadingExample(object):
             if input_state == False:
                 print('Button Pressed')
                 time.sleep(0.2)
-            
-            time.sleep(self.interval)
 
 example = ThreadingExample()
 
