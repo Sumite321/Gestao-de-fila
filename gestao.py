@@ -6,6 +6,9 @@ from PIL import ImageTk, Image
 import RPi.GPIO as GPIO
 import time
 import threading
+import os.path
+
+
 
 global a
 tmp = []
@@ -95,6 +98,12 @@ class Menu:
     def get(self):
         return self.nomef.get()
     
+    def set_path(self,path):
+        self.path = path
+    
+    def get_path(self):
+        return self.path
+    
     def addLabel(self,name):
         fonte2 = ('Verdana', '15')
         tmp.append(Label(self.frame1, text=name, bg='lightblue', font=fonte2 ,  height=3))
@@ -108,13 +117,20 @@ class Menu:
         for x in tmp1:
             x.pack()
 
-        path = "unknow.png"
-        
+        path = "Fotos/"
+        path += name
+        path += ".png"
+        os.path.isfile(path)
+        if os.path.isfile(path):
+            path = path
+        else:
+            path = "unknow.png"
+
         img = ImageTk.PhotoImage(Image.open(path).resize((250, 250)))
-        
-        
+                    
+                    
         tmp2.append(tk.Label(a.frame2, image = img))
-        
+                    
         for photo in tmp2:
             photo.photo = img
             photo.pack()
