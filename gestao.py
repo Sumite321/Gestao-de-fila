@@ -81,8 +81,8 @@ class Menu:
         root.grid_columnconfigure(1, weight=1, uniform="group1")
         root.grid_rowconfigure(0, weight=1)
 
-        Label(self.frame1, text="Lista de espera", font=('Verdana', '14', 'bold'), bg='lightblue', height=3).pack()
-        Label(self.frame2, text="Sua vez", font=('Verdana', '14', 'bold'), bg='lightgreen', height=3).pack()
+        Label(self.frame1, text="Lista de espera", font=('Verdana', '30', 'bold'), bg='lightblue', height=3).pack()
+        Label(self.frame2, text="Sua vez", font=('Verdana', '30', 'bold'), bg='lightgreen', height=3).pack()
 
         fonte1 = ('Verdana', '10', 'bold')
         self.nomef = Entry(self.frame1, width=10, font=fonte1)
@@ -105,13 +105,13 @@ class Menu:
         return self.path
     
     def addLabel(self,name):
-        fonte2 = ('Verdana', '15')
+        fonte2 = ('Verdana', '25')
         tmp.append(Label(self.frame1, text=name, bg='lightblue', font=fonte2 ,  height=3))
         for x in tmp:
             x.pack()
 
     def addToMyTurn(self,name):
-        fonte3 = ('Verdana', '15')
+        fonte3 = ('Verdana', '25')
         tmp1.append(Label(self.frame2, text=name, bg='lightgreen',font=fonte3, height=3))
 
         for x in tmp1:
@@ -126,7 +126,7 @@ class Menu:
         else:
             path = "unknow.png"
 
-        img = ImageTk.PhotoImage(Image.open(path).resize((250, 250)))
+        img = ImageTk.PhotoImage(Image.open(path).resize((500, 500)))
                     
                     
         tmp2.append(tk.Label(a.frame2, image = img))
