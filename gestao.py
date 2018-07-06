@@ -3,7 +3,7 @@ import Tkinter as tk
 import MySQLdb
 import random
 from PIL import ImageTk, Image
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 import threading
 import os.path
@@ -15,9 +15,11 @@ tmp = []
 tmp1 = []
 COLORS =["red", "orange", "green"]
 tmp2 = [] #imagens
+counter = 0
 
 
 def callback():
+    global counter
     nameOfStudent = ""
     Notduplicate = True
     found = False
@@ -27,7 +29,7 @@ def callback():
                          db="gestao_bar")
         
     cur = db.cursor()
-                         
+
     cur.execute("SELECT * FROM dados_cartao")
  
     for row in cur.fetchall():
@@ -41,7 +43,9 @@ def callback():
             Notduplicate = False
 
     if (Notduplicate) and found:
+        counter += 1
         a.addLabel(nameOfStudent)
+        a.updateCounter(len(tmp),counter)
 
     db.close()
     print(a.get().lower())
@@ -55,14 +59,17 @@ def destroy():
             tmp2[0].destroy()
             tmp1.pop(0)
             tmp2.pop(0)
+            a.updateCounter(len(tmp),counter)
         a.addToMyTurn(tmp[0].cget("text"))
         tmp[0].destroy()
         tmp.pop(0)
+        a.updateCounter(len(tmp),counter)
     elif(len(tmp1)>0):
         tmp1[0].destroy()
         tmp2[0].destroy()
         tmp1.pop(0)
         tmp2.pop(0)
+        a.updateCounter(len(tmp),counter)
 
 
 
@@ -82,6 +89,10 @@ class Menu:
         root.grid_rowconfigure(0, weight=1)
 
         Label(self.frame1, text="Lista de espera", font=('Verdana', '30', 'bold'), bg='lightblue', height=3).pack()
+        
+        self.counterUpdate = Label(self.frame1, text="0/2", font=('Verdana', '30', 'bold'), bg='lightblue', height=2)
+        self.counterUpdate.pack()
+        
         Label(self.frame2, text="Sua vez", font=('Verdana', '30', 'bold'), bg='lightgreen', height=3).pack()
 
         fonte1 = ('Verdana', '10', 'bold')
@@ -151,6 +162,11 @@ class Menu:
         print("butao")
         self.b.invoke()
 
+    def updateCounter(self,inQueue,total):
+
+        #self.counterUpdate.config(text=total)
+        self.counterUpdate["text"]= str(inQueue) + "/" + str(total)
+
 
 class ThreadingExample(object):
     """ Threading example class
@@ -184,7 +200,7 @@ class ThreadingExample(object):
             
             time.sleep(self.interval)
 
-example = ThreadingExample()
+#example = ThreadingExample()
 
 root = Tk()
 a = Menu(root, "Lista")
