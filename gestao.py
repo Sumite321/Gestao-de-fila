@@ -11,11 +11,12 @@ import os.path
 
 
 global a
-tmp = []
-tmp1 = []
+tmp = [] # lista de espera
+tmp1 = [] # sua vez
 COLORS =["red", "orange", "green"]
 tmp2 = [] #imagens
 counter = 0
+lastWait = ["null"]
 
 
 def callback():
@@ -31,6 +32,7 @@ def callback():
     cur = db.cursor()
 
     cur.execute("SELECT * FROM dados_cartao")
+ 
  
     for row in cur.fetchall():
         print(row[0],row[1])
@@ -53,8 +55,10 @@ def callback():
 
 
 def destroy():
+   
     if(len(tmp)) > 0:
         if(len(tmp1)>0):
+            a.updatePreviousTurn(tmp1[0].cget("text"))
             tmp1[0].destroy()
             tmp2[0].destroy()
             tmp1.pop(0)
@@ -65,6 +69,7 @@ def destroy():
         tmp.pop(0)
         a.updateCounter(len(tmp),counter)
     elif(len(tmp1)>0):
+        a.updatePreviousTurn(tmp1[0].cget("text"))
         tmp1[0].destroy()
         tmp2[0].destroy()
         tmp1.pop(0)
@@ -93,6 +98,8 @@ class Menu:
         self.counterUpdate = Label(self.frame1, text="0/2", font=('Verdana', '30', 'bold'), bg='lightblue', height=2)
         self.counterUpdate.pack()
         
+        
+        
         Label(self.frame2, text="Sua vez", font=('Verdana', '30', 'bold'), bg='lightgreen', height=3).pack()
 
         fonte1 = ('Verdana', '10', 'bold')
@@ -105,6 +112,9 @@ class Menu:
         self.b.pack_forget()
         c = Button(self.frame2, text=">>", command=destroy)
         c.pack()
+    
+        self.previous = Label(self.frame2, text="previous", font=('Verdana', '30', 'bold'), bg='lightgreen', height=3)
+        self.previous.pack()
 
     def get(self):
         return self.nomef.get()
@@ -167,6 +177,9 @@ class Menu:
         #self.counterUpdate.config(text=total)
         self.counterUpdate["text"]= str(inQueue) + "/" + str(total)
 
+    def updatePreviousTurn(self,text):
+
+        self.previous["text"] = text
 
 class ThreadingExample(object):
     """ Threading example class
