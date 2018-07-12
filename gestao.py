@@ -114,7 +114,7 @@ class Menu:
         c.pack()
     
         self.previous = Label(self.frame2, text="previous", font=('Verdana', '30', 'bold'), bg='lightgreen', height=3)
-        self.previous.pack()
+        self.previous.pack(side = BOTTOM)
 
     def get(self):
         return self.nomef.get()
